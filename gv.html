@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Mi Portafolio</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <style>
+    body {
+    font-family: "Courier New", Courier, monospace;
+    background-color: #282c34;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.terminal {
+    background-color: #000;
+    border-radius: 10px;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    position: relative;
+}
+
+.header {
+    background-color: #1e1e1e; /* Darker shade */
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
+}
+
+.buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.close,
+.minimize,
+.expand {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.close {
+    background-color: #ff5f57;
+}
+
+.close:hover {
+    background-color: #d64242; /* Darker shade on hover */
+}
+
+.minimize {
+    background-color: #ffbd2e;
+}
+
+.minimize:hover {
+    background-color: #e5a526; /* Darker shade on hover */
+}
+
+.expand {
+    background-color: #27c93f;
+}
+
+.expand:hover {
+    background-color: #219834; /* Darker shade on hover */
+}
+
+.ascii-art {
+    font-size: 1vw; /* Default font size */
+    white-space: pre-wrap; /* This will make sure the content wraps */
+    word-wrap: break-word; /* This will break words properly */
+}
+
+/* Adjust font size for smaller screens */
+@media only screen and (max-width: 600px) {
+    .ascii-art {
+        font-size: 1.7vw;
+    }
+}
+
+/* Adjust font size for medium screens */
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+    .ascii-art {
+        font-size: 1.6vw;
+    }
+}
+
+/* Adjust font size for larger screens */
+@media only screen and (min-width: 901px) {
+    .ascii-art {
+        font-size: 1vw;
+    }
+}
+
+.content {
+    padding: 20px;
+    color: #00ff00;
+    height: calc(100vh - 50px); /* Subtracting the height of header */
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+.cursor {
+    background-color: #00ff00;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%,
+    49% {
+        opacity: 1;
+    }
+    50%,
+    100% {
+        opacity: 0;
+    }
+}
+
+.header {
+    background-color: #282c34;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    height: 14px;
+}
+
+.buttons {
+    display: flex;
+    gap: 8px; /* Increased gap */
+}
+
+.close,
+.minimize,
+.expand {
+    width: 14px; /* Increased size */
+    height: 14px;
+    border-radius: 50%;
+    transition: 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
+}
+
+.close {
+    background-color: #fc5f56;
+}
+
+.close:hover {
+    background-color: #eb4d44; /* Darker shade on hover */
+}
+
+.minimize {
+    background-color: #fecb2e;
+}
+
+.minimize:hover {
+    background-color: #e4b526; /* Darker shade on hover */
+}
+
+.expand {
+    background-color: #2bca3b;
+}
+
+.expand:hover {
+    background-color: #24ad31; /* Darker shade on hover */
+}
+
+a {
+    color: #00ff00;
+    text-decoration: none;
+    border-bottom: 1px dashed #00ff00;
+    transition: 0.3s ease;
+}
+
+a:hover {
+    color: #00cc00;
+    background-color: #222;
+    border-bottom: 1px solid #00cc00;
+}
+
+span[onclick]:hover {
+    cursor: pointer;
+    background-color: rgba(0, 255, 0, 0.2);
+}
+
+  </style>
+  <body>
+    <div class="terminal">
+        <div class="header">
+            <div class="buttons">
+                <div class="close"></div>
+                <div class="minimize"></div>
+                <div class="expand"></div>
+            </div>
+            <p>Terminal</p>
+        </div>
+        <div class="content">
+            <p class="output">
+                Last login: <span id="dateTime"></span>
+            <pre style="color:#00cc00 ;" class="ascii-art">
+              ╔═══╗     ╔╗           ╔╗     ╔╗  ╔╗         ╔╗                 
+              ║╔═╗║     ║║           ║║     ║╚╗╔╝║         ║║                 
+              ║║ ╚╝╔══╗ ║╚═╗╔═╗╔╗╔══╗║║     ╚╗║║╔╝╔══╗╔═╗╔═╝║╔╗╔╗╔═══╗╔══╗╔══╗
+              ║║╔═╗╚ ╗║ ║╔╗║║╔╝╠╣║╔╗║║║      ║╚╝║ ║╔╗║║╔╝║╔╗║║║║║╠══║║║╔═╝║╔╗║
+              ║╚╩═║║╚╝╚╗║╚╝║║║ ║║║║═╣║╚╗     ╚╗╔╝ ║║═╣║║ ║╚╝║║╚╝║║║══╣║╚═╗║╚╝║
+              ╚═══╝╚═══╝╚══╝╚╝ ╚╝╚══╝╚═╝      ╚╝  ╚══╝╚╝ ╚══╝╚══╝╚═══╝╚══╝╚══╝
+                                                                              
+                                                                                                                           
+                </pre>
+            Check out my <a href="https://github.com/gvdev666">Github</a>, <a<br><br>
+            </p>
+            <p class="typing"></p>
+            <p class="input"><span class="prompt">$</span> <span class="cursor"></span></p>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+      const currentDate = new Date();
+const formattedDate =
+    currentDate.toDateString().split(" ").slice(0, 3).join(" ") +
+    " " +
+    currentDate.toTimeString().split(" ")[0].split(":").slice(0, 3).join(":");
+document.getElementById("dateTime").innerHTML = formattedDate;
+const typingElement = document.querySelector(".typing");
+let index = 0;
+let currentText = "";
+let isDeleting = false;
+let currentMenu = "main";
+
+const menus = {
+    main: `Select a menu:<br><span onclick="handleMenuClick('1')">[1] Who is Gabriel?</span><br><span onclick="handleMenuClick('2')">[2] Contact me</span><br><span onclick="handleMenuClick('3')">[3] My works</span><br><span onclick="handleMenuClick('4')">[4] My Products</span>`,
+    1: `Who is Gabriel?<br><br>My name is Gabriel Verduzco, and I am a Computer Systems Engineer. I have always had a passion for technology and computing, which led me to pursue a career in systems engineering.
+
+Throughout my academic and professional journey, I have gained solid knowledge in areas such as programming, software development, and system design. My focus is on finding innovative and efficient solutions to technological challenges.
+
+In addition to my technical skills, I consider myself a proactive and results-oriented individual. I enjoy working in a team and tackling new challenges that allow me to learn and grow professionally. I am always looking for opportunities to improve my skills and stay abreast of the latest technological trends.
+
+Outside of the professional realm, I like to explore new technologies, participate in open-source projects, and contribute to the community. I also enjoy sports and reading as ways to unwind and recharge.
+
+I am excited to continue growing in my career, facing new challenges, and continuing to learn in the ever-evolving world of technology.
+<br><br><span onclick="handleMenuClick('B')">[B] Back</span>`,
+    2: `Contact:<br>- Email: <a href="mailto:gvdev666@gmail.com">gvdev666@gmail.com</a><br>- My Business: <a href="https://nevado.onrender.com">Nevado Tech</a><br><br><span onclick="handleMenuClick('B')">[B] Back</span>`,
+    3: `Some of my Projects:<br><br>
+- <strong>Redikars</strong>: Vehicle Import Management Web Application for Sanisimar Company Developed a web application for the efficient management of vehicle imports for Sanisimar company. <br>
+- <strong>LAEM and Learning: Educational System with Internal Billing and Own E-Learning</strong>: Implemented an educational system featuring internal billing functionality and an integrated E-Learning platform.<br>
+- <strong>Socialsmx: Event Quoting System for Socialsmx Company</strong>: Designed and implemented an event quoting system for Socialsmx company.<br>
+- <strong>Chofer Pro</strong>: A Uber app to lease cars<br>
+- <strong>RinoazulMkt: Web Design and Content Management Systems Creation</strong>: Engaged in the design of websites and creation of various content management systems for RinoazulMkt.<br>
+- <strong>Vatoon</strong>:Created an online platform catering to manga enthusiasts, providing a user-friendly interface for reading manga.<br>
+<br><br>
+<span onclick="handleMenuClick('B')">[B] Back</span>`,
+4: `My Products:<br><br>
+      - <strong>SICOE</strong>: Comprehensive system for school administration.
+      <br><br>
+      <strong>Mi Clientela (Mini ERP):</strong> Mini Enterprise Resource Planning system for small businesses.
+      <br><br>
+      <span onclick="handleMenuClick('B')">[B] Back</span>`
+};
+
+function handleMenuClick(menuKey) {
+    if (menuKey in menus && currentMenu !== menuKey) {
+        isDeleting = true;
+        typeDeleteAnimation(() => {
+            currentMenu = menuKey;
+            currentText = menus[menuKey];
+            index = 0;
+            typeDeleteAnimation();
+        });
+    } else if ((menuKey === "B" || menuKey === "b") && currentMenu !== "main") {
+        isDeleting = true;
+        typeDeleteAnimation(() => {
+            currentMenu = "main";
+            currentText = menus.main;
+            index = 0;
+            typeDeleteAnimation();
+        });
+    }
+}
+function typeDeleteAnimation(callback) {
+    let speed = 7; // default typing speed
+    let deleteSpeed = 3; // default deletion speed
+
+    if (currentMenu === "1" || currentMenu === "3") {
+        speed = 1; // Makes the typing faster for "Who is Gabriel".
+        deleteSpeed = 1; // Makes the deletion faster for "Who is Gabriel". Adjust as needed.
+    }
+
+    if (isDeleting && typingElement.innerHTML !== "") {
+        if (currentText.charAt(index - 1) === ">") {
+            const openTagIndex = currentText.lastIndexOf("<", index);
+            const tagName = currentText.substring(
+                openTagIndex + 1,
+                currentText.indexOf(" ", openTagIndex)
+            );
+            const startTagIndex = currentText.lastIndexOf(
+                `</${tagName}>`,
+                index
+            );
+            index = startTagIndex;
+        } else {
+            index--;
+        }
+        currentText = currentText.slice(0, index);
+        typingElement.innerHTML = currentText;
+
+        setTimeout(() => typeDeleteAnimation(callback), deleteSpeed);
+    } else if (isDeleting) {
+        isDeleting = false;
+        if (callback) callback();
+    } else if (!isDeleting && index < currentText.length) {
+        if (currentText.charAt(index) === "<") {
+            if (currentText.substr(index, 4) === "<br>") {
+                const br = document.createElement("br");
+                typingElement.appendChild(br);
+                index += 4;
+            } else {
+                const closingTagIndex = currentText.indexOf(">", index);
+                const tagName = currentText
+                    .substring(index + 1, closingTagIndex)
+                    .split(" ")[0];
+                const endTagIndex =
+                    currentText.indexOf(`</${tagName}>`, index) +
+                    `</${tagName}>`.length;
+                const outerHTML = currentText.substring(index, endTagIndex);
+                const tempDiv = document.createElement("div");
+                tempDiv.innerHTML = outerHTML;
+                const childElement = tempDiv.firstChild;
+
+                if (tagName === "a") {
+                    childElement.target = "_blank";
+                    speed = 1; // Faster typing for <a> tag
+                } else if (tagName === "span") {
+                    childElement.onclick = function () {
+                        const menuKey = childElement
+                            .getAttribute("onclick")
+                            .replace("handleMenuClick('", "")
+                            .replace("')", "");
+                        handleMenuClick(menuKey);
+                    };
+                    speed = 1; // Faster typing for <span> tag
+                }
+
+                typingElement.appendChild(childElement);
+                index = endTagIndex;
+            }
+        } else {
+            typingElement.innerHTML += currentText.charAt(index);
+            index++;
+        }
+
+        setTimeout(typeDeleteAnimation, speed);
+    }
+}
+
+function handleUserInput(event) {
+    const key = event.key;
+    if (key in menus && currentMenu !== key) {
+        isDeleting = true;
+        typeDeleteAnimation(() => {
+            currentMenu = key;
+            currentText = menus[key];
+            index = 0;
+            typeDeleteAnimation();
+        });
+    } else if ((key === "B" || key === "b") && currentMenu !== "main") {
+        isDeleting = true;
+        typeDeleteAnimation(() => {
+            currentMenu = "main";
+            currentText = menus.main;
+            index = 0;
+            typeDeleteAnimation();
+        });
+    }
+}
+
+document.addEventListener("keydown", handleUserInput);
+
+// Initialize the typing animation with the main menu on page load
+currentText = menus.main;
+typeDeleteAnimation();
+
+    </script>
+  </body>
+</html>
